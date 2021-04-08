@@ -8,24 +8,25 @@ capa_estados <-readOGR("La ruta en donde guardaste la carpeta conjunto de datos"
 class(capa_estados) 
 
 #names(capa_estados), sirve para ver que se usa la CVE_ENT
+#Mapa simple
 ggplot() +  
   geom_polygon(data=capa_estados, aes(x=long, y=lat, group=group))
 
-#Con los contornos de los estados y etiquetas. 
+#Mapa con los contornos de los estados y etiquetas. 
 ggplot() +  
   geom_polygon(data=capa_estados, aes(x=long, y=lat, group=group), 
                fill="white", color="black") +
-labs(title="Mapa de México",   #Las anotaciones con la sintaxis usual de ggplot2::
+labs(title="Mapa de México",   
      subtitle="Subtítulo", 
      caption="Elaboración propia. \n Datos geográficos: INEGI 2016.") 
 
 
-#Solo el mapa y ajusta el largo y ancho
+#Solo el mapa y se ajusta el largo y ancho a los máx y min de latitud y longitud
 ggplot() +  
   geom_polygon(data=capa_estados, aes(x=long, y=lat, group=group), 
                fill="white", color="black") +
   expand_limits(x = capa_estados_df$long, y = capa_estados_df$lat)+
-  labs(title="Mapa de México",   #Las anotaciones con la sintaxis usual de ggplot2::
+  labs(title="Mapa de México",   
        subtitle="Subtítulo", 
        caption="Elaboración propia. \n Datos geográficos: INEGI 2016.") +
   theme_void()
